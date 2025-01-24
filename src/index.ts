@@ -9,5 +9,5 @@ server.use(express.json())
 
 
 AppDataSource.initialize()
-.then(() => server.listen(3000, () => {console.log("Hawk tuah on port 3000!")}))
+.then(() => server.listen(5432, () => {console.log("Hawk tuah on port 5432!")}))
 .catch(() => {console.log("no hawk tuahs")})
