@@ -13,6 +13,6 @@ export class User {
     email: string
 
     @Column()
-    senha: number
+    senha: string
 
 }

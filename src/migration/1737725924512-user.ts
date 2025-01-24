@@ -1,16 +1,17 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class User1737727170182 implements MigrationInterface {
+export class User1737725924512 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "question",
+                name: "users",
                 columns: [
                     {
                         name: "id",
                         isPrimary: true,
                         isGenerated: true,
+                        generationStrategy: "increment",
                         type: "int",
                     },
                     {
