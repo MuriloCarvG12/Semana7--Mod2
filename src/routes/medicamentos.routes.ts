@@ -77,6 +77,34 @@ Routes_Med.post('/cadastrarMedicamento', async (req:Request, res:Response) =>
         
     })
 
+Routes_Med.put('/atualizarProduto/:id', async (req:Request, res :Response) => {
+    try
+    {
+        const body_id = req.params.id;
+        const medBody = req.body as Medicamento
+
+        const produto_desatualizado = await medicamentoRepository.findOneBy({id: Number(body_id)})
+
+        if(!produto_desatualizado)
+            {
+                res.status(404).json("não foi possivel encontrar o medicamento especificado")
+            }
+
+        Object.assign(produto_desatualizado, medBody)
+
+        await medicamentoRepository.save(produto_desatualizado)
+    
+        res.status(200).json(produto_desatualizado)
+           
+
+    } 
+
+    catch (error) 
+    {
+        res.status(500).json('não foi possivel encontrar o servidor')
+    }
+})
+
 Routes_Med.delete('/removerMedicamento/:id', async (req: Request, res:Response) => 
 {
     try 
@@ -85,7 +113,7 @@ Routes_Med.delete('/removerMedicamento/:id', async (req: Request, res:Response) 
 
         const produto_deletado = await medicamentoRepository.delete({id: Number(body_id)})
 
-        res.status(202).json(produto_deletado)
+        res.status(202).json('produto deletado com sucesso!')
     } 
 
     catch (error) 
