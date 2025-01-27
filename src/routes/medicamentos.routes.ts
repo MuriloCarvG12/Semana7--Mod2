@@ -13,7 +13,7 @@ Routes_Med.get('/all', async (req: Request, res: Response) => {
         const medicamentos = await medicamentoRepository.find()
         if(Object.keys(medicamentos).length === 0)
             {
-                res.status(201).json('Não há medicamentos cadastrados!')
+                res.status(404).json('Não há medicamentos cadastrados!')
             }
         else
         {
@@ -27,16 +27,16 @@ Routes_Med.get('/all', async (req: Request, res: Response) => {
         res.status(500).json('não foi possivel encontrar o servidor')
     }
 
-Routes_Med.get('/med/:id', async (req: Request, res:Response) =>  
+Routes_Med.get('/medicamento/:med_id', async (req: Request, res:Response) =>  
 {
     try 
     {
-        const body_id = req.params.id
+        const body_id = req.params.med_id
         const medicamento_procurado = await medicamentoRepository.findOneBy({id: parseInt(body_id)}) 
 
         if(Object.keys(medicamento_procurado).length === 0)
             {
-                res.status(201).json("o medicamento que voce procura não esta cadastrado")
+                res.status(404).json("o medicamento que voce procura não esta cadastrado")
             }
         else
         {
@@ -46,7 +46,8 @@ Routes_Med.get('/med/:id', async (req: Request, res:Response) =>
 
     catch (error) 
     {
-        res.status(500).json('não foi possivel encontrar o servidor')
+        console.log(error)
+        res.status(500).json("não foi possivel encontrar o servidor")
     }
 })
 
