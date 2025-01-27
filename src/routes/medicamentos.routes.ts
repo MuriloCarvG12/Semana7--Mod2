@@ -32,7 +32,7 @@ Routes_Med.get('/medicamento/:med_id', async (req: Request, res:Response) =>
     try 
     {
         const body_id = req.params.med_id
-        const medicamento_procurado = await medicamentoRepository.findOneBy({id: parseInt(body_id)}) 
+        const medicamento_procurado = await medicamentoRepository.findOneBy({id: Number(body_id)}) 
 
         if(Object.keys(medicamento_procurado).length === 0)
             {
@@ -76,6 +76,23 @@ Routes_Med.post('/cadastrarMedicamento', async (req:Request, res:Response) =>
 
         
     })
+
+Routes_Med.delete('/removerMedicamento/:id', async (req: Request, res:Response) => 
+{
+    try 
+    {
+        const body_id = req.params.id
+
+        const produto_deletado = await medicamentoRepository.delete({id: Number(body_id)})
+
+        res.status(202).json(produto_deletado)
+    } 
+
+    catch (error) 
+    {
+        res.status(500).json('não foi possivel encontrar o servidor')
+    }
+})
 
 
 
