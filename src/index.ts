@@ -1,3 +1,6 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import { AppDataSource } from "./data-source"
 import { User } from "./entity/User"
 import express, { NextFunction, Request, Response } from "express"
