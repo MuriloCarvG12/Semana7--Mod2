@@ -31,7 +31,7 @@ user_auth_router.post('/', async (req: Request, res: Response) => {
         if(is_valid)
             {
                 const jwt_key = process.env.jwt_key
-                console.log("bear " + jwt_key)
+                
                 const payload = 
                 {
                     email: user.email,
